@@ -17,6 +17,13 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        val getID = intent
+        val id = getID.getStringExtra("idNFC")
+
+        tvNameID.setText(id)
+
+
+
         myProfile.setOnClickListener{
             startActivity(Intent(this,ProfileActivity::class.java))
 
