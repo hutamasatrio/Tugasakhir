@@ -7,22 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:gravity="center"
-        android:id="@+id/txtView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scan RFID"/>
+<!--    <TextView-->
+<!--        android:gravity="center"-->
+<!--        android:id="@+id/txtView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textSize="30dp"-->
+<!--        android:text="Scan RFID"/>-->
 
-    <Button
-        android:layout_below="@+id/txtView"
-        android:layout_width="wrap_content"
-        android:text="btn urgent"
-        android:id="@+id/btnUrgent"
-        android:layout_height="wrap_content"/>
+<!--    <Button-->
+<!--        android:layout_below="@+id/lin"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:text="btn urgent"-->
+<!--        android:id="@+id/btnUrgent"-->
+<!--        android:layout_height="wrap_content"/>-->
 
     <LinearLayout
-        android:layout_below="@+id/btnUrgent"
+        android:id="@+id/lin"
+
         android:layout_width="wrap_content"
         android:orientation="vertical"
         android:layout_height="wrap_content">
@@ -30,22 +32,14 @@
             android:id="@+id/resultTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Result Will Appear here"
+            android:text="SCAN RFID"
+            android:textSize="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/messageEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Put Message you want to add to NFC Tag"
-            android:inputType="textPersonName"
-            android:text="Name"
-            tools:layout_editor_absoluteX="47dp"
-            tools:layout_editor_absoluteY="16dp" />
+
 
     </LinearLayout>
 

@@ -9,9 +9,7 @@ import java.util.Arrays;
 
 public class TextRecord implements ParsedNdefRecord {
 
-    /**
-     * ISO/IANA language code
-     */
+
     private final String mLanguageCode;
 
     private final String mText;

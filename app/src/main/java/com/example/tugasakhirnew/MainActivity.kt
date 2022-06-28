@@ -24,11 +24,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
         initView()
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this)
-
         if (checkNFCEnable()) {
             mPendingIntent = PendingIntent.getActivity(
                 this, 0,
@@ -42,10 +39,6 @@ class MainActivity : AppCompatActivity() {
 //        btnUrgent.setOnClickListener {
 //            startActivity(Intent(this, HomeActivity::class.java))
 //
-//            //menampilkan atau membaca nfc
-//            mNfcAdapter = NfcAdapter.getDefaultAdapter(this)
-//            startActivity(Intent(this, HomeActivity::class.java))
-//            Toast.makeText(this,"cek", Toast.LENGTH_SHORT).show()
 //        }
 
 
@@ -71,14 +64,18 @@ class MainActivity : AppCompatActivity() {
                 // Process the messages array.
                 //       parserNDEFMessage(messages)
                 val stringname = parserNDEFMessage(messages)
-                if (stringname.toString()== "satrio"){
+                if (stringname.toString() == "satrio"){
                     Toast.makeText(this,stringname.toString(), Toast.LENGTH_LONG).show()
 
                     val idNFC = Intent(this@MainActivity, HomeActivity::class.java)
                     idNFC.putExtra("idNFC", stringname.toString())
                     startActivity(idNFC)
 
-                    startActivity(Intent(this@MainActivity, HomeActivity::class.java))
+//                    startActivity(Intent(this@MainActivity, HomeActivity::class.java))
+                }
+                else{
+                    Toast.makeText(this,"user tidak diketahui, silahkan hubungi admin", Toast.LENGTH_LONG).show()
+
                 }
             }
         }

@@ -15,6 +15,11 @@ class ProfileActivity : AppCompatActivity() {
         val fragmentAdapter = VPAdapter(supportFragmentManager)
         VPProfile.adapter = fragmentAdapter
 
+
+
         TLHome.setupWithViewPager(VPProfile)
+
+        val getID = intent
+        val id = getID.getStringExtra("idNFC2")
     }
 }

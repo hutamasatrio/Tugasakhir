@@ -25,6 +25,10 @@ class HomeActivity : AppCompatActivity() {
 
 
         myProfile.setOnClickListener{
+            val idNFC = Intent(this@HomeActivity, ProfileActivity::class.java)
+            idNFC.putExtra("idNFC2", getID.toString())
+            startActivity(idNFC)
+
             startActivity(Intent(this,ProfileActivity::class.java))
 
 
