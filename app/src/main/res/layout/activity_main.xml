@@ -15,12 +15,12 @@
 <!--        android:textSize="30dp"-->
 <!--        android:text="Scan RFID"/>-->
 
-<!--    <Button-->
-<!--        android:layout_below="@+id/lin"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:text="btn urgent"-->
-<!--        android:id="@+id/btnUrgent"-->
-<!--        android:layout_height="wrap_content"/>-->
+    <Button
+        android:layout_below="@+id/lin"
+        android:layout_width="wrap_content"
+        android:text="btn urgent"
+        android:id="@+id/btnUrgent"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:id="@+id/lin"

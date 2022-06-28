@@ -8,6 +8,9 @@ import kotlinx.android.synthetic.main.activity_user_info.*
 import kotlinx.android.synthetic.main.activity_user_info.TLHome
 
 class ProfileActivity : AppCompatActivity() {
+
+    private var userId: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -22,4 +25,7 @@ class ProfileActivity : AppCompatActivity() {
         val getID = intent
         val id = getID.getStringExtra("idNFC2")
     }
+
+    fun getUserId() = userId
+
 }

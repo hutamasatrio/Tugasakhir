@@ -24,22 +24,22 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initView()
-        mNfcAdapter = NfcAdapter.getDefaultAdapter(this)
-        if (checkNFCEnable()) {
-            mPendingIntent = PendingIntent.getActivity(
-                this, 0,
-                Intent(this, this.javaClass)
-                    .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0
-            )
-        } else {
-            mTvView.text = getString(R.string.tv_noNfc)
-        }
-
-//        btnUrgent.setOnClickListener {
-//            startActivity(Intent(this, HomeActivity::class.java))
-//
+//        initView()
+//        mNfcAdapter = NfcAdapter.getDefaultAdapter(this)
+//        if (checkNFCEnable()) {
+//            mPendingIntent = PendingIntent.getActivity(
+//                this, 0,
+//                Intent(this, this.javaClass)
+//                    .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0
+//            )
+//        } else {
+//            mTvView.text = getString(R.string.tv_noNfc)
 //        }
+
+        btnUrgent.setOnClickListener {
+            startActivity(Intent(this, HomeActivity::class.java))
+//
+        }
 
 
     }
