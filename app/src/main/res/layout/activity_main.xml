@@ -28,9 +28,10 @@
         android:layout_width="wrap_content"
         android:orientation="vertical"
         android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/resultTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="136dp"
             android:layout_height="wrap_content"
             android:text="SCAN RFID"
             android:textSize="30dp"

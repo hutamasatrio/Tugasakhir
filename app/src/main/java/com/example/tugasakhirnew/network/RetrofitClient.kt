@@ -1,26 +1,40 @@
 package com.example.tugasakhirnew.network
 
+import android.content.Context
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.net.URI.create
+import java.util.concurrent.TimeUnit
+import javax.net.ssl.HostnameVerifier
+import javax.net.ssl.SSLContext
+import javax.net.ssl.SSLSession
 
 object RetrofitClient {
-    fun getInstance(): Retrofit {
-        var mHttpLoggingInterceptor = HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
+    val BASE_URL = "http://api-ta-satrio.online"
 
-        var mOkHttpClient = OkHttpClient
-            .Builder()
-            .addInterceptor(mHttpLoggingInterceptor)
+    fun getInterceptor(): OkHttpClient {
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+
+        val okhttp = OkHttpClient.Builder()
+            .addInterceptor(httpLoggingInterceptor)
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(60, TimeUnit.SECONDS)
+            .retryOnConnectionFailure(true)
             .build()
 
-
-        var retrofit: Retrofit = retrofit2.Retrofit.Builder()
-            .baseUrl("https://lokalhost/restAPITA/api/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(mOkHttpClient)
-            .build()
-        return retrofit
+        return okhttp
     }
+
+    fun getNewtwork(): Retrofit {
+        return Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(getInterceptor())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+    }
+
 }
