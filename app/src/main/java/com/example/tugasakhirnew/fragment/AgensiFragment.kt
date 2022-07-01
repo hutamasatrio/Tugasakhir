@@ -14,28 +14,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tugasakhirnew.ProfileActivity
 import com.example.tugasakhirnew.R
 import com.example.tugasakhirnew.model.DummyItem
+import com.example.tugasakhirnew.model.UrgentContact
+import com.example.tugasakhirnew.model.Work
 import com.example.tugasakhirnew.network.ApiInterface
 import com.example.tugasakhirnew.network.RetrofitClient
 import kotlinx.android.synthetic.main.fragment_agensi.*
+import kotlinx.android.synthetic.main.fragment_urgensi.*
+import org.jetbrains.anko.support.v4.ctx
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [AgensiFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AgensiFragment : Fragment() {
-    private val apiInterface = RetrofitClient.getNewtwork().create(ApiInterface::class.java)
+
     lateinit var rvAdaptorAgensiFragment : RVAdaptorAgensiFragment
     lateinit var linearlayoutmanager:LinearLayoutManager
 
+    private lateinit var ctx: Context
+    lateinit var userId: String
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        this.ctx = context
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,9 +48,11 @@ class AgensiFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        userId = (ctx as ProfileActivity).getUserId()
         getData()
         rvAdaptor()
     }
+
 
     private fun rvAdaptor() {
         RV_agensi.setHasFixedSize(true)
@@ -57,25 +61,25 @@ class AgensiFragment : Fragment() {
     }
 
     private fun getData() {
-//        val user = apiInterface2.getDatadummy()
-//        user.enqueue(object : Callback<List<DummyItem>?> { override fun onResponse(call: Call<List<DummyItem>?>, response: Response<List<DummyItem>?>) {
-//                val responseBody = response.body()!!
-//
-//                rvAdaptorAgensiFragment = RVAdaptorAgensiFragment(context!!, responseBody)
-//                rvAdaptorAgensiFragment.notifyDataSetChanged()
-//                RV_agensi.adapter = rvAdaptorAgensiFragment
-//
-//
-//            }
-//
-//
-//            override fun onFailure(call: Call<List<DummyItem>?>, t: Throwable) {
-////                Toast.makeText(context@AgensiFragment, "data gagal", Toast.LENGTH_SHORT).show()
-////                Log.d("main activity", "failed to load data"+t.message)
-//            }
-//        })
+        RetrofitClient.getApi().getWorkbyId(userId)
+            .enqueue(object : Callback<Work?> {
+                override fun onResponse(call: Call<Work?>, response: Response<Work?>) {
 
+                    response.body()?.let {
+                        rvAdaptorAgensiFragment = RVAdaptorAgensiFragment(context!!, it.data)
+                        rvAdaptorAgensiFragment.notifyDataSetChanged()
+                        RV_agensi.adapter = rvAdaptorAgensiFragment
 
+                    }
+                }
+
+                override fun onFailure(call: Call<Work?>, t: Throwable) {
+                    print("data gagal")
+                    Log.d("main activity", "failed to load data"+t.message)
+                }
+            })
     }
+
+
 
 }

@@ -7,17 +7,13 @@ import android.nfc.NfcAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import com.example.tugasakhirnew.common.Constant.Companion.NFC_PARAM
+import com.example.tugasakhirnew.common.printMessage
 import com.example.tugasakhirnew.model.UserProfile
-import com.example.tugasakhirnew.network.ApiInterface
 import com.example.tugasakhirnew.network.RetrofitClient
 import com.qifan.readnfcmessage.parser.NdefMessageParser
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,14 +23,11 @@ class MainActivity : AppCompatActivity() {
 
     private var mNfcAdapter: NfcAdapter? = null
     private var mPendingIntent: PendingIntent? = null
-    private lateinit var mTvView: TextView
-
-    private val retrofitClient = RetrofitClient.getNewtwork().create(ApiInterface::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        initView()
+
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this)
         if (checkNFCEnable()) {
             mPendingIntent = PendingIntent.getActivity(
@@ -42,46 +35,43 @@ class MainActivity : AppCompatActivity() {
                 Intent(this, this.javaClass)
                     .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0
             )
-        } else {
-            mTvView.text = getString(R.string.tv_noNfc)
+        }
+        else{
+            printMessage("nyalakan fitu NFC")
+
         }
 
-        getData()
+//        getData()
 
-        btnUrgent.setOnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
-//
-        }
+//        btnUrgent.setOnClickListener {
+//            startActivity(Intent(this, HomeActivity::class.java))
+//        }
 
     }
     private fun getData() {
+        RetrofitClient.getApi().getData()
+            .enqueue(object : Callback<UserProfile?> {
+                override fun onResponse(
+                    call: Call<UserProfile?>,
+                    response: Response<UserProfile?>
+                ) {
 
-        val profileUser = retrofitClient.getData()
-        profileUser.enqueue(object : Callback<UserProfile?> {
-            override fun onResponse(call: Call<UserProfile?>, response: Response<UserProfile?>) {
+                    val responseBody = response.body()!!
 
-                val responseBody = response.body()!!
+                    val myStringBuilder = StringBuilder()
+                    Log.i("data_raw", response.toString())
+                    for (myData in responseBody.data) {
+                        myStringBuilder.append(myData.name)
+                        myStringBuilder.append("/n")
+                    }
 
-                val myStringBuilder = StringBuilder()
-                Log.i("data_raw", response.toString())
-                for (myData in responseBody.data) {
-                    myStringBuilder.append(myData.name)
-                    myStringBuilder.append("/n")
                 }
-//                Log.i("data_response", myStringBuilder.toString())
-//
-////                txtId3.text = myStringBuilder.toString()
-//                tv.postDelayed({
-//                    txtId2.text = myStringBuilder
-//                }, 1000)
 
-            }
-
-            override fun onFailure(call: Call<UserProfile?>, t: Throwable) {
-                Toast.makeText(this@MainActivity, "data gagal", Toast.LENGTH_SHORT).show()
-                Log.d("main activity", "failed to load data"+t.message)
-            }
-        })
+                override fun onFailure(call: Call<UserProfile?>, t: Throwable) {
+                    Toast.makeText(this@MainActivity, "data gagal", Toast.LENGTH_SHORT).show()
+                    Log.d("main activity", "failed to load data" + t.message)
+                }
+            })
 
 
     }
@@ -108,60 +98,69 @@ class MainActivity : AppCompatActivity() {
                 val messages: List<NdefMessage> = rawMessages.map { it as NdefMessage }
                 // Process the messages array.
                 //       parserNDEFMessage(messages)
-                val stringname = parserNDEFMessage(messages)
+                parserNDEFMessage(messages)
+
+                /*val stringname = parserNDEFMessage(messages)
                 if (stringname.toString() == "satrio"){
                     Toast.makeText(this,stringname.toString(), Toast.LENGTH_LONG).show()
 
                     val idNFC = Intent(this@MainActivity, HomeActivity::class.java)
                     idNFC.putExtra(NFC_PARAM, stringname.toString())
                     startActivity(idNFC)
-
-                    mTvView.text = stringname.toString()
-
-
-//                    startActivity(Intent(this@MainActivity, HomeActivity::class.java))
                 }
                 else{
-                    Toast.makeText(this,"user tidak diketahui, silahkan hubungi admin", Toast.LENGTH_LONG).show()
-
-                }
+                    resultTextView.text= stringname.toString()
+                  print("user tidak diketahui, silahkan hubungi admin")
+                }*/
             }
         }
     }
 
     private fun parserNDEFMessage(messages: List<NdefMessage>) {
-        val builder = StringBuilder()
+//        val builder = StringBuilder()
         val records = NdefMessageParser.parse(messages[0])
-        val size = records.size
-        val name = "satrio\n"
-
-        for (i in 0 until size) {
-            val record = records.get(i)
-            val str = record.str()
-            builder.append(str).append("\n")
-        }
-        mTvView.text = builder.toString()
-        if (mTvView.text.toString()== builder.toString()){
-            Toast.makeText(this,builder.toString(), Toast.LENGTH_LONG).show()
-
-            val idNFC = Intent(this@MainActivity, HomeActivity::class.java)
-            idNFC.putExtra(NFC_PARAM, builder.toString())
-            startActivity(idNFC)
-            mTvView.text = builder.toString()
-
-        }else{
-            Toast.makeText(this, "gagal", Toast.LENGTH_SHORT).show()
-        }
+        val str = records.get(records.size - 1).str()
+        validateUser(str)
     }
 
-    private fun initView() {
+    private fun validateUser(userId: String) {
+        RetrofitClient.getApi().getUserbyId(userId)
+            .enqueue(object : Callback<UserProfile> {
+                override fun onResponse(call: Call<UserProfile?>, response: Response<UserProfile?>) {
+                    if (response.body() == null)  {
+                        printMessage("login failed")
+                        resultTextView.text= userId
+                        return
+                    }
 
-        mTvView = findViewById<View>(R.id.resultTextView) as TextView
+                    response.body()?.let {
+                        if (it.status && userId == it.data[it.data.size - 1].userId) {
+                            printMessage("login success")
+                            onValidData(userId)
+                        } else {
+                            printMessage("login failed")
+                            resultTextView.text= userId
+                        }
+                    }
+                }
+
+
+                override fun onFailure(call: Call<UserProfile?>, t: Throwable) {
+                    resultTextView.text= userId
+                    printMessage("user unrigistered!")
+                }
+            })
+    }
+
+    private fun onValidData(userId: String) {
+            startActivity(
+                Intent(this@MainActivity, HomeActivity::class.java)
+                    .putExtra(NFC_PARAM, userId)
+            )
     }
 
     private fun checkNFCEnable(): Boolean {
         return if (mNfcAdapter == null) {
-            mTvView.text = getString(R.string.tv_noNfc)
             false
         } else {
             mNfcAdapter!!.isEnabled

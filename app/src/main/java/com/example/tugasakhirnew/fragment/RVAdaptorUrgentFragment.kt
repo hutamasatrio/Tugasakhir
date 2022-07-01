@@ -13,7 +13,7 @@ import com.example.tugasakhirnew.model.UrgentContact
 import kotlinx.android.synthetic.main.item_agensi_fragment.view.*
 import kotlinx.android.synthetic.main.item_urgent_contact.view.*
 
-class RVAdaptorUrgentFragment (val context: Context, val list: List<DataUrgentContact?>): RecyclerView.Adapter<RVAdaptorUrgentFragment.ViewHolder>() {
+class RVAdaptorUrgentFragment(val context: Context, val list: List<DataUrgentContact?>): RecyclerView.Adapter<RVAdaptorUrgentFragment.ViewHolder>() {
     
     class ViewHolder (itemView: View):RecyclerView.ViewHolder(itemView){
         var userId: TextView

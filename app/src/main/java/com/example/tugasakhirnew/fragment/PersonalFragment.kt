@@ -2,26 +2,29 @@ package com.example.tugasakhirnew.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.tugasakhirnew.ProfileActivity
 import com.example.tugasakhirnew.R
+import com.example.tugasakhirnew.model.UrgentContact
+import com.example.tugasakhirnew.model.UserProfile
+import com.example.tugasakhirnew.network.ApiInterface
+import com.example.tugasakhirnew.network.RetrofitClient
+import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.fragment_personal.*
+import kotlinx.android.synthetic.main.fragment_urgensi.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PersonalFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PersonalFragment : Fragment() {
 
     private lateinit var ctx: Context
+    lateinit var userId: String
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -38,8 +41,39 @@ class PersonalFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        userId = (ctx as ProfileActivity).getUserId()
+        getData()
+    }
 
-        (ctx as ProfileActivity).getUserId()
+    private fun getData() {
+        RetrofitClient.getApi().getUserbyId(userId)
+            .enqueue(object : Callback<UserProfile> {
+                override fun onResponse(call: Call<UserProfile?>, response: Response<UserProfile?>) {
+                    val responseBody = response.body()!!
+                    val dataEmail = StringBuilder()
+
+                    for (myData in responseBody.data!!) {
+                        dataEmail.append(myData?.email)
+                        dataEmail.append("/n")
+                    }
+                    val dataPhone = StringBuilder()
+                    for (myData in responseBody.data!!) {
+                        dataPhone.append(myData?.phone)
+                        dataPhone.append("/n")
+                    }
+
+//                txtId3.text = myStringBuilder.toString()
+                    tvEmail.text = dataEmail
+                    tvPhone.text = dataPhone
+
+                }
+
+
+                override fun onFailure(call: Call<UserProfile?>, t: Throwable) {
+//                Toast.makeText(context@AgensiFragment, "data gagal", Toast.LENGTH_SHORT).show()
+//                Log.d("main activity", "failed to load data"+t.message)
+                }
+            })
     }
 
 }

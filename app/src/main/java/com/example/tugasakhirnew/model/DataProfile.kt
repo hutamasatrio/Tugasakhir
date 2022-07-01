@@ -7,7 +7,7 @@ data class DataProfile(
             val profilePic: Any? = null,
             val workLabel: Any? = null,
             val instagramAcc: Any? = null,
-            val adress: Any? = null,
+            val phone: String? = null,
             val language: Any? = null,
             val linkedIn: Any? = null,
             val userId: String? = null,

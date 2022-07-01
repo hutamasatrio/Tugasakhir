@@ -6,11 +6,14 @@
         <entry key="app/src/main/res/layout/activity_add_friend.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.16296296296296298" />
         <entry key="app/src/main/res/layout/activity_list_person.xml" value="0.359375" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.17477203647416414" />
         <entry key="app/src/main/res/layout/fragment_agensi.xml" value="0.17477203647416414" />
+        <entry key="app/src/main/res/layout/fragment_personal.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_urgensi.xml" value="0.17477203647416414" />
+        <entry key="app/src/main/res/layout/item_List_Friend.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/item_agensi_fragment.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/layout/item_list_friend.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/item_urgent_contact.xml" value="0.359375" />
         <entry key="app/src/main/res/layout/urgentcontactitem.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.35833333333333334" />

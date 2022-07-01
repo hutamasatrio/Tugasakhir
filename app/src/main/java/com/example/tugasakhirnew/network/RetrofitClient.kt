@@ -1,18 +1,14 @@
 package com.example.tugasakhirnew.network
 
-import android.content.Context
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.net.URI.create
 import java.util.concurrent.TimeUnit
-import javax.net.ssl.HostnameVerifier
-import javax.net.ssl.SSLContext
-import javax.net.ssl.SSLSession
 
 object RetrofitClient {
-    val BASE_URL = "http://api-ta-satrio.online"
+    private val BASE_URL = "http://api-ta-satrio.online"
+    private var api: ApiInterface = getNetwork()
 
     fun getInterceptor(): OkHttpClient {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
@@ -29,12 +25,18 @@ object RetrofitClient {
         return okhttp
     }
 
-    fun getNewtwork(): Retrofit {
+    fun getNetwork(): ApiInterface {
         return Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(getInterceptor())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+            .baseUrl(BASE_URL)
+            .client(getInterceptor())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApiInterface::class.java)
+    }
+
+    fun getApi(): ApiInterface {
+        if (api == null) api = getNetwork()
+        return api
     }
 
 }

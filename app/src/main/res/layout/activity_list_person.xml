@@ -7,9 +7,11 @@
     tools:context=".ListPersonActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
         android:id="@+id/RV_ListFriend"
-        android:layout_height="match_parent"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"/>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

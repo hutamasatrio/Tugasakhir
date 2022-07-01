@@ -1,19 +1,17 @@
 package com.example.tugasakhirnew.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.tugasakhirnew.ProfileActivity
 import com.example.tugasakhirnew.R
-import com.example.tugasakhirnew.model.DummyItem
 import com.example.tugasakhirnew.model.UrgentContact
-import com.example.tugasakhirnew.network.ApiInterface
 import com.example.tugasakhirnew.network.RetrofitClient
-import kotlinx.android.synthetic.main.fragment_agensi.*
 import kotlinx.android.synthetic.main.fragment_urgensi.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,9 +19,16 @@ import retrofit2.Response
 
 class UrgensiFragment : Fragment() {
 
-    private val apiInterface = RetrofitClient.getNewtwork().create(ApiInterface::class.java)
+    private lateinit var ctx: Context
+    lateinit var userId: String
+
     lateinit var rvAdaptorUrgensiFragment: RVAdaptorUrgentFragment
     lateinit var linearlayoutmanager: LinearLayoutManager
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        this.ctx = context
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +41,7 @@ class UrgensiFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        userId = (ctx as ProfileActivity).getUserId()
         getData()
         rvAdaptor()
     }
@@ -47,20 +53,22 @@ class UrgensiFragment : Fragment() {
     }
 
     private fun getData() {
-       /* val user = apiInterface2.getDataContact()
-        user.enqueue(object : Callback<UrgentContact?> {
-            override fun onResponse( call: Call<UrgentContact?>,response: Response<UrgentContact?>) {
-                response.body()?.let {
-                    rvAdaptorUrgensiFragment = RVAdaptorUrgentFragment(context!!, it.data)
-                    rvAdaptorUrgensiFragment.notifyDataSetChanged()
-                    RV_urgent.adapter = rvAdaptorUrgensiFragment
-                }
-            }
+        RetrofitClient.getApi().getDataContactbyId(userId)
+            .enqueue(object : Callback<UrgentContact?> {
+                override fun onResponse(call: Call<UrgentContact?>, response: Response<UrgentContact?>) {
 
-            override fun onFailure(call: Call<UrgentContact?>, t: Throwable) {
-//                Toast.makeText(context@AgensiFragment, "data gagal", Toast.LENGTH_SHORT).show()
-//                Log.d("main activity", "failed to load data"+t.message)
-            }
-        })*/
+                    response.body()?.let {
+                        rvAdaptorUrgensiFragment = RVAdaptorUrgentFragment(context!!, it.data)
+                        rvAdaptorUrgensiFragment.notifyDataSetChanged()
+                        RV_urgent.adapter = rvAdaptorUrgensiFragment
+
+                    }
+                }
+
+                override fun onFailure(call: Call<UrgentContact?>, t: Throwable) {
+                    print("data gagal")
+                    Log.d("main activity", "failed to load data"+t.message)
+                }
+            })
     }
 }

@@ -8,9 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tugasakhirnew.R
 import com.example.tugasakhirnew.model.DummyItem
+import com.example.tugasakhirnew.model.WorkData
 import kotlinx.android.synthetic.main.item_agensi_fragment.view.*
 
-class RVAdaptorAgensiFragment (val context: Context,val list: List<DummyItem>): RecyclerView.Adapter<RVAdaptorAgensiFragment.ViewHolder>() {
+class RVAdaptorAgensiFragment (val context: Context,val list: List<WorkData>): RecyclerView.Adapter<RVAdaptorAgensiFragment.ViewHolder>() {
     
     class ViewHolder (itemView: View):RecyclerView.ViewHolder(itemView){
         var userId: TextView
@@ -30,8 +31,8 @@ class RVAdaptorAgensiFragment (val context: Context,val list: List<DummyItem>): 
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.userId.text = list[position].id.toString()
-        holder.title.text = list[position].title
+        holder.userId.text = list[position].idExperience
+        holder.title.text = list[position].description
     }
     override fun getItemCount(): Int {
         return list.size

@@ -55,6 +55,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvNamaActivityProfile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -62,7 +63,6 @@
                     android:text="Satrio Budhi Hutama"
                     android:textColor="#424242"
                     android:textSize="21sp"
-
                     android:gravity="center"
                     android:textStyle="bold" />
 
@@ -70,6 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:id="@+id/tvWorkLabelActivityProfile"
                     android:fontFamily="@font/proximanovaregular"
                     android:text="Android Developer"
                     android:textSize="14sp" />
@@ -105,6 +106,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvDomicilyActivityProfile"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Indonesia"
@@ -136,6 +138,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvAgeActivityProfile"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="17-08-2018"
