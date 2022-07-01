@@ -15,6 +15,7 @@ import com.example.tugasakhirnew.ProfileActivity
 import com.example.tugasakhirnew.R
 import com.example.tugasakhirnew.model.DummyItem
 import com.example.tugasakhirnew.model.UrgentContact
+import com.example.tugasakhirnew.model.UserProfile
 import com.example.tugasakhirnew.model.Work
 import com.example.tugasakhirnew.network.ApiInterface
 import com.example.tugasakhirnew.network.RetrofitClient
@@ -78,7 +79,23 @@ class AgensiFragment : Fragment() {
                     Log.d("main activity", "failed to load data"+t.message)
                 }
             })
+
+        RetrofitClient.getApi().getUserbyId(userId)
+            .enqueue(object : Callback<UserProfile?> {
+                override fun onResponse(call: Call<UserProfile?>, response: Response<UserProfile?>) {
+
+
+                }
+
+                override fun onFailure(call: Call<UserProfile?>, t: Throwable) {
+                    print("data gagal")
+                    Log.d("main activity", "failed to load data"+t.message)
+                }
+            })
+
+
     }
+
 
 
 

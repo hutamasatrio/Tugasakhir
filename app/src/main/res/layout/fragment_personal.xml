@@ -59,10 +59,7 @@
                                 android:textSize="17sp"
                                 android:textStyle="bold" />
 
-                            <Space
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1" />
+
 
 
                         </LinearLayout>
@@ -97,10 +94,7 @@
                             android:fontFamily="@font/proximanovaregular"
                             android:textStyle="bold" />
 
-                        <Space
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
+
 
 
                     </LinearLayout>
@@ -125,7 +119,7 @@
                                 android:src="@drawable/ic_call_24dp" />
 
                             <TextView
-                                android:id="@+id/tvPhone"
+                                android:id="@+id/tvPhonePersonal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20dp"
@@ -150,7 +144,7 @@
                                 android:src="@drawable/ic_email_24dp" />
 
                             <TextView
-                                android:id="@+id/tvEmail"
+                                android:id="@+id/tvEmailPersonal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20dp"
@@ -175,6 +169,7 @@
                                 android:src="@drawable/ic_location_24dp" />
 
                             <TextView
+                                android:id="@+id/tvAdressPersonal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20dp"
@@ -207,10 +202,6 @@
                             android:textSize="17sp"
                             android:textStyle="bold" />
 
-                        <Space
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
 
 
 
@@ -236,11 +227,12 @@
                                 android:src="@drawable/facebook" />
 
                             <TextView
+                                android:id="@+id/tvFacebook"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20dp"
                                 android:text="hutamasatrio"
-                                android:textSize="15sp"/>
+                                android:textSize="15sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -262,6 +254,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20dp"
                                 android:text="hutamasatrio"
+                                android:id="@+id/tvInstagram"
                                 android:textSize="15sp" />
                         </LinearLayout>
 
@@ -283,6 +276,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20dp"
+                                android:id="@+id/tvTwitter"
                                 android:text="Leeds, United Kingdom"
                                 android:textSize="15sp" />
                         </LinearLayout>

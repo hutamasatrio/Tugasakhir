@@ -50,21 +50,45 @@ class PersonalFragment : Fragment() {
             .enqueue(object : Callback<UserProfile> {
                 override fun onResponse(call: Call<UserProfile?>, response: Response<UserProfile?>) {
                     val responseBody = response.body()!!
-                    val dataEmail = StringBuilder()
 
+                    val dataEmail = StringBuilder()
                     for (myData in responseBody.data!!) {
                         dataEmail.append(myData?.email)
                         dataEmail.append("/n")
+                    }
+                    val dataAdress = StringBuilder()
+                    for (myData in responseBody.data!!) {
+                        dataAdress.append(myData?.address)
+                        dataAdress.append("/n")
                     }
                     val dataPhone = StringBuilder()
                     for (myData in responseBody.data!!) {
                         dataPhone.append(myData?.phone)
                         dataPhone.append("/n")
                     }
+                    val dataFacebook = StringBuilder()
+                    for (myData in responseBody.data!!) {
+                        dataFacebook.append(myData?.facebookAcc)
+                        dataFacebook.append("/n")
+                    }
+                    val dataTwitter= StringBuilder()
+                    for (myData in responseBody.data!!) {
+                        dataTwitter.append(myData?.twitterAcc)
+                        dataTwitter.append("/n")
+                    }
+                    val dataInstagram= StringBuilder()
+                    for (myData in responseBody.data!!) {
+                        dataInstagram.append(myData?.instagramAcc)
+                        dataInstagram.append("/n")
+                    }
 
 //                txtId3.text = myStringBuilder.toString()
-                    tvEmail.text = dataEmail
-                    tvPhone.text = dataPhone
+                    tvEmailPersonal.text = dataEmail
+                    tvPhonePersonal.text = dataPhone
+                    tvAdressPersonal.text= dataAdress
+                    tvFacebook.text= dataFacebook
+                    tvTwitter.text= dataTwitter
+                    tvInstagram.text= dataInstagram
 
                 }
 

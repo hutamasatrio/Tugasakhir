@@ -14,7 +14,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/tvRelationID"
+                android:id="@+id/tvNameContact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/contact1"
@@ -48,6 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:id="@+id/tvPhoneContact"
                     android:text="+91 7999193854"
                     android:textSize="15sp"
                     android:textColor="@color/goodgrey"
@@ -69,7 +70,7 @@
                     android:src="@drawable/ic_email_24dp" />
 
                 <TextView
-                    android:id="@+id/tvEmailId"
+                    android:id="@+id/tvEmailContact"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -94,6 +95,7 @@
                     android:src="@drawable/ic_location_24dp" />
 
                 <TextView
+                    android:id="@+id/tvAddressContact"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"

@@ -19,11 +19,13 @@ class RVAdaptorListFriend (val context: Context, val list: List<DataProfile>): R
     class ViewHolder (itemView: View):RecyclerView.ViewHolder(itemView){
         var userId: TextView
         var title :TextView
+        var alamat :TextView
 
 
         init {
             userId = itemView.tvItemListFriendName
             title = itemView.tvItemListFrienduserid
+            alamat =itemView.tvItemListAlamat
         }
     }
 
@@ -38,7 +40,8 @@ class RVAdaptorListFriend (val context: Context, val list: List<DataProfile>): R
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val id = list[position].userId
         holder.userId.text = list[position].name
-        holder.title.text = list[position].userId
+        holder.title.text = list[position].phone
+        holder.alamat.text = list[position].address as CharSequence?
         holder.itemView.setOnClickListener(View.OnClickListener {
             val intent = Intent(context, ProfileActivity::class.java)
             intent.putExtra("nfc_id", id)

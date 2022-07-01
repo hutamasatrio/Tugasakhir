@@ -14,12 +14,16 @@ import kotlinx.android.synthetic.main.item_agensi_fragment.view.*
 class RVAdaptorAgensiFragment (val context: Context,val list: List<WorkData>): RecyclerView.Adapter<RVAdaptorAgensiFragment.ViewHolder>() {
     
     class ViewHolder (itemView: View):RecyclerView.ViewHolder(itemView){
-        var userId: TextView
-        var title :TextView
+        var job: TextView
+        var timeline :TextView
+        var workplace: TextView
+        var desc :TextView
 
         init {
-            userId = itemView.job
-            title = itemView.timeline
+            job = itemView.job
+            timeline = itemView.timeline
+            workplace = itemView.tvWorkPlaceAgensi
+            desc = itemView.tvDescriptionWork
         }
     }
 
@@ -31,8 +35,10 @@ class RVAdaptorAgensiFragment (val context: Context,val list: List<WorkData>): R
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.userId.text = list[position].idExperience
-        holder.title.text = list[position].description
+        holder.job.text = list[position].posisition
+        holder.timeline.text = list[position].timeline
+        holder.workplace.text = list[position].workPlace
+        holder.desc.text = list[position].description
     }
     override fun getItemCount(): Int {
         return list.size

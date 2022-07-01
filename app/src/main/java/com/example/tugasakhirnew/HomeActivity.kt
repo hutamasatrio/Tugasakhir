@@ -45,9 +45,7 @@ class HomeActivity : AppCompatActivity() {
         RetrofitClient.getApi().getUserbyId(NFCId)
             .enqueue(object : Callback<UserProfile?> {
             override fun onResponse(call: Call<UserProfile?>, response: Response<UserProfile?>) {
-
                 val responseBody = response.body()!!
-
                 val myStringBuilder = StringBuilder()
                 Log.i("data_raw", response.toString())
                 for (myData in responseBody.data) {
@@ -55,15 +53,7 @@ class HomeActivity : AppCompatActivity() {
                     myStringBuilder.append("/n")
                 }
                 tvNameID.text=myStringBuilder
-//                Log.i("data_response", myStringBuilder.toString())
-//
-////                txtId3.text = myStringBuilder.toString()
-//                tv.postDelayed({
-//                    txtId2.text = myStringBuilder
-//                }, 1000)
-
             }
-
             override fun onFailure(call: Call<UserProfile?>, t: Throwable) {
                 printMessage("data gagal")
                 Log.d("main activity", "failed to load data"+t.message)

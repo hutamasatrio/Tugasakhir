@@ -48,33 +48,33 @@ class MainActivity : AppCompatActivity() {
 //        }
 
     }
-    private fun getData() {
-        RetrofitClient.getApi().getData()
-            .enqueue(object : Callback<UserProfile?> {
-                override fun onResponse(
-                    call: Call<UserProfile?>,
-                    response: Response<UserProfile?>
-                ) {
-
-                    val responseBody = response.body()!!
-
-                    val myStringBuilder = StringBuilder()
-                    Log.i("data_raw", response.toString())
-                    for (myData in responseBody.data) {
-                        myStringBuilder.append(myData.name)
-                        myStringBuilder.append("/n")
-                    }
-
-                }
-
-                override fun onFailure(call: Call<UserProfile?>, t: Throwable) {
-                    Toast.makeText(this@MainActivity, "data gagal", Toast.LENGTH_SHORT).show()
-                    Log.d("main activity", "failed to load data" + t.message)
-                }
-            })
-
-
-    }
+//    private fun getData() {
+//        RetrofitClient.getApi().getData()
+//            .enqueue(object : Callback<UserProfile?> {
+//                override fun onResponse(
+//                    call: Call<UserProfile?>,
+//                    response: Response<UserProfile?>
+//                ) {
+//
+//                    val responseBody = response.body()!!
+//
+//                    val myStringBuilder = StringBuilder()
+//                    Log.i("data_raw", response.toString())
+//                    for (myData in responseBody.data) {
+//                        myStringBuilder.append(myData.name)
+//                        myStringBuilder.append("/n")
+//                    }
+//
+//                }
+//
+//                override fun onFailure(call: Call<UserProfile?>, t: Throwable) {
+//                    Toast.makeText(this@MainActivity, "data gagal", Toast.LENGTH_SHORT).show()
+//                    Log.d("main activity", "failed to load data" + t.message)
+//                }
+//            })
+//
+//
+//    }
 
     override fun onResume() {
         super.onResume()

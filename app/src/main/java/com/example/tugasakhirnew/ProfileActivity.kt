@@ -7,8 +7,6 @@ import com.example.tugasakhirnew.fragment.VPAdapter
 import com.example.tugasakhirnew.model.UserProfile
 import com.example.tugasakhirnew.network.RetrofitClient
 import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.activity_user_info.TLHome
-import kotlinx.android.synthetic.main.activity_user_info.VPProfile
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -65,14 +63,14 @@ class ProfileActivity : AppCompatActivity() {
 
                     val dataProfileDomicily = StringBuilder()
                     for (myData in responseBody.data) {
-                        dataProfileDomicily.append(myData.email)
+                        dataProfileDomicily.append(myData.domicily)
                     }
 
 
 //
                     tvNamaActivityProfile.text = dataProfileNama
                     tvDomicilyActivityProfile.text = dataProfileDomicily
-                    tvAgeActivityProfile.text = dataProfileAge
+//                    tvAgeActivityProfile.text = dataProfileAge
                     tvWorkLabelActivityProfile.text = dataProfileWorkLabel
                 }
 

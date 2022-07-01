@@ -16,12 +16,14 @@ import kotlinx.android.synthetic.main.item_urgent_contact.view.*
 class RVAdaptorUrgentFragment(val context: Context, val list: List<DataUrgentContact?>): RecyclerView.Adapter<RVAdaptorUrgentFragment.ViewHolder>() {
     
     class ViewHolder (itemView: View):RecyclerView.ViewHolder(itemView){
-        var userId: TextView
-        var title :TextView
+        var name: TextView
+        var address :TextView
+        var phone :TextView
 
         init {
-            userId = itemView.tvRelationID
-            title = itemView.tvEmailId
+            name = itemView.tvNameContact
+            address = itemView.tvAddressContact
+            phone = itemView.tvPhoneContact
         }
     }
 
@@ -34,8 +36,9 @@ class RVAdaptorUrgentFragment(val context: Context, val list: List<DataUrgentCon
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         list[position]?.let {
-            holder.userId.text = it.urgentName
-            holder.title.text = it.urgentAddress
+            holder.name.text = it.urgentName
+            holder.address.text = it.urgentAddress
+            holder.phone.text = it.noTelpon
         }
     }
     override fun getItemCount(): Int {
